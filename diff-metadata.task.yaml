@@ -1,0 +1,24 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: jasonmorgan/alpine-worker
+    tag: 0.1.0
+
+inputs:
+- name: source
+
+params:
+  BASEURL: "https://s3.amazonaws.com/strabo/tiles"
+  TILENAME: p-healthwatch
+  VERSION1: "1.4.5-build.41"
+  VERSION2: "1.4.4-build.1"
+  VERSION1METADATAFILENAME: metadata.yml
+  VERSION2METADATAFILENAME: metadata.yml
+
+run:
+  path: /bin/bash
+  args: 
+  - source/diff-metadata.sh
